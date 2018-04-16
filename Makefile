@@ -107,7 +107,9 @@ ds_token_erc20_files:=totalSupply-spec.k \
 
 casper_files:=recommended_target_hash-spec.k \
               vote-spec.k \
-              delete_validator-spec.k
+              delete_validator-spec.k \
+              withdraw-failure-1-spec.k \
+              withdraw-failure-2-spec.k
 
 proof_tests:= bihu vyper-erc20 zeppelin-erc20 hkg-erc20 hobby-erc20 sum-to-n ds-token-erc20 casper
 
@@ -212,6 +214,20 @@ $(specs_dir)/casper/delete_validator-spec.k: $(casper_tmpls) casper/casper-spec.
 	@echo >&2 "==  gen-spec: $@"
 	mkdir -p $(dir $@)
 	python3 resources/gen-spec.py $^ delete_validator delete_validator > $@
+	cp casper/abstract-semantics.k $(dir $@)
+	cp casper/verification.k $(dir $@)
+
+$(specs_dir)/casper/withdraw-failure-1-spec.k: $(casper_tmpls) casper/casper-spec.ini
+	@echo >&2 "==  gen-spec: $@"
+	mkdir -p $(dir $@)
+	python3 resources/gen-spec.py $^ withdraw-failure-1 withdraw-failure-1 > $@
+	cp casper/abstract-semantics.k $(dir $@)
+	cp casper/verification.k $(dir $@)
+
+$(specs_dir)/casper/withdraw-failure-2-spec.k: $(casper_tmpls) casper/casper-spec.ini
+	@echo >&2 "==  gen-spec: $@"
+	mkdir -p $(dir $@)
+	python3 resources/gen-spec.py $^ withdraw-failure-2 withdraw-failure-2 > $@
 	cp casper/abstract-semantics.k $(dir $@)
 	cp casper/verification.k $(dir $@)
 
