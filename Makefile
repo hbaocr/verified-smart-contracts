@@ -258,7 +258,7 @@ $(specs_dir)/casper/withdraw-failure-2-spec.k: $(casper_tmpls) casper/casper-spe
 $(specs_dir)/casper/withdraw-success-spec.k: $(casper_tmpls) casper/casper-spec.ini
 	@echo >&2 "==  gen-spec: $@"
 	mkdir -p $(dir $@)
-	python3 resources/gen-spec.py $^ withdraw-success delete_validator withdraw-success > $@
+	python3 resources/gen-spec.py $^ withdraw-success withdraw-success > $@
 	cp casper/abstract-semantics.k $(dir $@)
 	cp casper/verification.k $(dir $@)
 
